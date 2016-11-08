@@ -1,0 +1,25 @@
+#hyperboloid.rib
+Display "hyperboloid.tiff" "file" "rgb"
+Projection "perspective"
+WorldBegin
+	Translate 0 0 6
+	Rotate -90 1 0 0
+
+Pattern "PxrOSL" "myShader"
+				"string shader" "first"
+				"color Cin" [0.1 0.9 0.1]
+
+
+Bxdf "PxrDisney" "forTheTeapot"				
+				"reference color baseColor" ["myShader:Cout"]
+	Hyperboloid 2 -2 -2 2 2 2 360
+
+AttributeBegin
+	Rotate -90 1 0 0
+	Scake 0.4 0.4 0.4
+	Translate -1 0 -1
+	Bxdf "PxrDisney" "forTheSphere" "color baseColor" [ 0.1 0.8 0.1]
+	Patch "bilinear" "P" [2 -10 10 2 -10 -10 2 10 10 2 10 -10]
+AttributeEnd
+
+WorldEnd

@@ -1,12 +1,12 @@
-LIBDIR=${RMANTREE}
+LIBDIR=./PIXAR
 CFLAGS=-I${LIBDIR}/include
-LIBS= -L${LIBDIR}/lib -lprman
-RENDERER=render
+LIBS=gzlib.o -L${LIBDIR}/lib -lrib -lm
+RENDERER=angel
 
-SCENE=color
+SCENE=curves
 
 all :${SCENE}.tiff
-	sho ${SCENE}.tiff
+	viewer ${SCENE}.tiff
 ${SCENE}.tiff : ${SCENE}.rib
 	${RENDERER} ${SCENE}.rib
 
