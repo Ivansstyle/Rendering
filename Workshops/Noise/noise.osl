@@ -1,0 +1,18 @@
+surface noise (
+  color Cin = 1
+output color Cout=1
+)
+{
+float freq = 5;
+Cout= 0.5;
+Cout+=(float)noise("perlin",P*freq)/freq;
+freq*=2;
+Cout+=(float)noise("perlin",P*freq)/freq;
+
+int i; 
+for(i=0;i<8;++i)
+  {
+  freq*=2;
+  Cout+=(float)noise("perlin",P*freq)/freq;   
+  } 
+}

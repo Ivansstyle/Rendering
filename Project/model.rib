@@ -1,0 +1,65 @@
+#model.rib 
+
+### This is model for the Rendering assignement by stundent Ivans Saponenko
+# 2016, Bournemouth University 
+
+
+#Display settings
+Display "polytest.exr" "framebuffer" "rgb"
+Format 1080 720 1.0
+Exposure 1.0 2.2
+Quantize "rgba" 255 0 255 0
+ 
+#Renderer setings
+Hider "raytrace" "int incremental" [1] "int minsamples" [32] "int maxsamples" [400]
+#Integrator "PxrDefault" "integrator"
+#Integrator "PxrDirectLighting "integrator"
+Integrator "PxrPathTracer" "integrator"
+#Integrator "PxrVCM" "integrator"
+ 
+
+ #Projections settings 
+ Projection "perspective" "fov" [120]
+
+#Setting up the camera 
+ Translate 0 0 5
+
+WorldBegin # BEGIN WORLD
+
+ Bxdf "PxrDisney" "forTheSky" "color baseColor" [1 1 1]
+  Sphere 10 -10 10 360
+  AttributeBegin
+    AreaLightSource "PxrStdAreaLight" "theLight" "float exposure" [9]
+    Translate -2 2 -2
+    Sphere 0.1 -0.1 0.1 360
+  AttributeEnd
+    TransformBegin
+      Pattern "PxrOSL" "myShader"
+           "string shader" "repeat"
+           "color Cin" [0.1 0.5 0.1]
+      Bxdf "PxrDisney" "test" "reference color baseColor" ["myShader:Cout"]
+      GeneralPolygon[7] "P" 
+      [
+        1 0 1
+        3 0 1
+        4 2 1
+        3 4 1
+        1 4 1
+        0 2 1
+        1 0 1
+      ]
+      #Patch "bilinear" "P"
+      
+      AttributeBegin
+        TransformBegin
+          Rotate -180 1 0 1
+          Scale 0.4 0.4 0.4
+          Translate -1 0 -1
+          Bxdf "PxrDisney" "forTheSphere" "color baseColor" [ 0.1 0.8 0.1]
+          Patch "bilinear" "P" [2 -10 10 2 -10 -10 2 10 10 2 10 -10]
+        TransformEnd  
+      AttributeEnd
+    TransformEnd
+
+WorldEnd # END WORLD 
+
