@@ -1,0 +1,41 @@
+##RenderMan RIB
+version 3.04
+FrameBegin 1
+	#Format 384 384 1
+	Clipping 0.1 10
+	PixelFilter "box" 1 1
+	Projection "perspective" "fov" [45.4322]
+	ScreenWindow -1 1 -1 1
+	PixelSamples 3 3
+	ConcatTransform [ 0.590606 0.591501 0.548919 0  0 0.68023 -0.732998 0  0.80696 -0.432913 -0.401748 0  0.903436 2.90732 5.13921 1 ]
+	Display "polytest.exr" "framebuffer" "rgb"
+Format 1080 720 1.0
+Exposure 1.0 2.2
+Quantize "rgba" 255 0 255 0
+	WorldBegin 
+		TransformBegin 
+			CoordinateSystem "worldspace"
+		TransformEnd 
+		TransformBegin 
+			Attribute "identifier" "name" ["spotLightShape1"]
+			Transform [ -0.782565 -0.391286 -0.484239 0  0.154843 0.631037 -0.760142 0  0.603006 -0.669842 -0.43324 0  -6.41097 3.41785 3.84758 1 ]
+			LightSource "mtorSpotLight" "light1" "intensity" [2] "lightcolor" [1 1 1] "float decayRate" [0] "float coneAngle" [0.349066] "float penumbraAngle" [0] "float dropOff" [0] "float useBarnDoors" [0] "float[4] barnDoors" [0.349066 0.349066 0.349066 0.349066]  "float useDecayRegions" [0] "float[6] decayRegions" [1 2 3 6 8 10]
+		TransformEnd 
+		AttributeBegin 
+			ConcatTransform [ -0.753747 0.101409 0.649293 0  -0.0821177 -0.994812 0.0600452 0  0.652013 -0.00805955 0.758165 0  -2.71116 -2.55821 1.01941 1 ]
+			ReadArchive "bluesphere_geometry.rib" 
+		AttributeEnd 
+		AttributeBegin 
+			ConcatTransform [ 0.863719 -0.11382 -0.490952 0  0.100041 0.993499 -0.0543275 0  0.493944 -0.00219184 0.869491 0  -0.31561 -3.51717 0.563144 1 ]
+			ReadArchive "fur_geometry.rib" 
+		AttributeEnd 
+		AttributeBegin 
+			ConcatTransform [ 1 0 0 0  0 1 0 0  0 0 1 0  0 -1.74722 -1.17628 1 ]
+			ReadArchive "redcylinder_geometry.rib" 
+		AttributeEnd 
+		AttributeBegin 
+			ConcatTransform [ 1 0 0 0  0 1 0 0  0 0 1 0  -2.5 -2 -0.5 1 ]
+			ReadArchive "greencone_geometry.rib" 
+		AttributeEnd 
+	WorldEnd 
+FrameEnd 
